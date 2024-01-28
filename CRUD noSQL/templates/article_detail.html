@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{{ article.title }}</title>
+  <link rel="shortcut icon" type="image/x-icon"
+    href="https://static.vecteezy.com/system/resources/previews/001/201/180/original/brain-png.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css') }}">
+
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style>
+    .card-body.comment {
+      height: auto;
+    }
+  </style>
+</head>
+
+<body>
+
+  <br>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 mx-auto text-center">
+        <div>
+          {% if current_user.is_admin == 1 %}
+          <a href="/admin_home" class="link-secondary">
+            {% elif current_user.is_admin == 0 %}
+            <a href="/home" class="link-secondary">
+              {% endif %}
+              <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-house"
+                viewBox="0 0 16 16">
+                <path
+                  d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z" />
+              </svg>
+            </a>
+        </div>
+        <h2 class="pretty mt-2">{{ article.title }}</h2>
+        {% for category in article.categories %}
+
+
+        <span class="badge text-bg-secondary">{{ category }}</span>
+        {% endfor %}
+        <p class="card-date fw-300 mt-2 mb-1">{{ article.date }}| <i>published by
+
+            {% for user in users %}
+            {% if article.author == user._id|string %}
+
+            {{ user.username }}</i>
+
+
+          {% endif %}
+          {% endfor %}
+        </p>
+
+
+
+        {% if article.image %}
+        <img src="{{ article.image }}" alt="{{ article.title }}" class="img-fluid mb-4 rounded-3 img-content">
+        {% else %}
+        <img class="img-fluid mb-4 rounded-3 img-content"
+          src="https://images.unsplash.com/photo-1612367980327-7454a7276aa7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80">
+        {% endif %}
+        <p class="text-center">{{ article.text }}</p>
+      </div>
+
+
+
+    </div>
+    {% for comment in article.comments %}
+
+
+    {% set obj_id = comment.author_id %}
+
+
+    {% if obj_id|string == current_user._id %}
+
+    <a href="#" onclick="event.preventDefault(); document.getElementById('comments_form_{{ comment._id }}').submit();"
+      class="txt-color mx-2">
+      <div style="text-align: right;margin-bottom: -20px;"><small class="badge">Delete Comment</small></div>
+    </a>
+    <form id="comments_form_{{ comment._id }}" method="POST"
+      action="{{ url_for('delete_comment', article_id=article._id, comment_id=comment._id) }}">
+
+    </form>
+    <div class="card mb-3">
+      <div class="card-body comment">
+
+
+
+
+        <p class="card-text">{{ comment.text }}</p>
+        <p class="card-text"><small class="text-muted">By
+            <i>{{ user_collection.find_one({'_id': comment.author_id}).username }}</i> | {{ comment.date }}</small></p>
+
+      </div>
+    </div>
+    {% elif current_user.is_admin == 1 %}
+    <a href="#" onclick="event.preventDefault(); document.getElementById('comments_form').submit();"
+      class="txt-color mx-2">
+      <div style="text-align: right;margin-bottom: -20px;"><small class="badge">Delete Comment</small></div>
+    </a>
+    <form id="comments_form" method="POST"
+      action="{{ url_for('delete_comment', article_id=article._id, comment_id=comment._id) }}">
+
+    </form>
+    <div class="card mb-3">
+      <div class="card-body comment">
+
+
+
+
+        <p class="card-text">{{ comment.text }}</p>
+        <p class="card-text"><small class="text-muted">By
+            <i>{{ user_collection.find_one({'_id': comment.author_id}).username }}</i> | {{ comment.date }}</small></p>
+
+      </div>
+    </div>
+    {% else %}
+    <div class="card mb-3">
+      <div class="card-body comment">
+
+        <p class="card-text">{{ comment.text }}</p>
+        <p class="card-text"><small class="text-muted">By
+            <i>{{ user_collection.find_one({'_id': comment.author_id}).username }}</i>| {{ comment.date }}</small></p>
+
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+
+
+    <form method="POST" action="{{ url_for('add_comment', article_id=article._id) }}">
+      <div class="form-group">
+        <label for="comment-text">Add a comment:</label>
+        <textarea class="form-control" id="comment-text" name="comment_text" rows="3"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+  <br><br>
+
+
+</body>
+
+</html>

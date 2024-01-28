@@ -1,0 +1,165 @@
+
+
+.txt-color {
+    color: #4A525D;
+}
+
+.main-heading {
+    font-weight: 280;
+    font-size: large;
+}
+
+.pretty{
+    font-family: 'Merriweather', serif;
+}
+
+
+.img-div {
+    min-height: 250px;
+  
+    background-color: #E8ECEF;
+}
+
+.card-body{
+    width: 442.4px;
+    height: 231.5px;
+    overflow: hidden;
+}
+
+.comment{
+    width: 800.4px;
+    height: 100px;
+   
+}
+
+
+
+.card-text{
+width: 90%;
+}
+
+.card-title{
+    height: 60px; /* adjust as needed */
+    overflow: hidden;
+    counter-reset: blues;
+}
+
+
+.img-content {
+
+ width: 100%;
+  height:250px;
+    object-fit: cover;
+}
+
+.fw-300 {
+    font-weight: 300;
+}
+
+.card-date {
+    font-size: small;
+}
+
+.border-custom {
+    border-color: #E8ECEF;
+}
+
+.txt-color-2 {
+    color: #FEF2F2;
+}
+
+.txt-color-3 {
+    color: #3F4751;
+}
+
+.txt-color-4 {
+    color: #F53163;
+}
+
+.txt-color-5 {
+    color: #606F84;
+}
+
+.div-bg {
+    background-image: url('https://i.ibb.co/tHVW3PB/Group-3959-8.png');
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+}
+
+.div-bg-2 {
+    background-image: url('https://i.ibb.co/9Z8LH61/Slider-6.png');
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+}
+
+.div-footer {
+    background-color: #B6666F;
+    min-height: 8em;
+}
+
+.mt-text {
+    margin-top: 15em;
+}
+
+.txt-chuducky {
+    font-weight: 100;
+}
+
+.btn-fufiary {
+    color: #3F4751;
+    background-color: #FEF2F2;
+    min-width: 10em;
+}
+
+.nav-item {
+    font-size: 1rem;
+    margin-right: 20px;
+}
+
+.navbar-nav {
+    margin-left: auto;
+    margin-right: 50px;
+}
+
+.link-icon{
+    margin-top: 10px;
+}
+
+.card:hover{
+ cursor: pointer;
+ transform: translate3D(0,-1px,0) scale(1.03);
+ transition: all .5s ease;
+}
+.img-hover:hover{
+  
+    filter: saturate(1.2);
+   
+}
+
+a {
+    text-decoration: none;
+
+}
+
+a:link {
+    color: black;
+  }
+  
+  /* visited link */
+  a:visited {
+    color: black;
+  }
+  
+  /* mouse over link */
+  a:hover{
+    color: grey;
+  }
+
+  .badge {
+    color:white;
+    background-color: black;
+    border-radius: 20px;
+    padding: 5px;
+  }

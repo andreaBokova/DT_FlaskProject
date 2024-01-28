@@ -1,0 +1,6 @@
+_id,date_of_registration,email,is_admin,password,username
+64625d0f16b8df740ee4b592,15/05/2023,m.bell@gmail.com,0,mb,merry_bell
+646260642ace34eb292693c3,15/05/2023,j.doe@gmail.com,1,jd,john_doe
+6462629dbafd983b69135877,15/05/2023,m.cooper@gmail.com,0,mc,matt_cooper
+6462643cee0041af643c08b4,15/05/2023,j.black@gmail.com,0,jb,jack_black
+64626493d3bde846fe3a6825,15/05/2023,d.miller@gmail.com,0,dm,david_miller
