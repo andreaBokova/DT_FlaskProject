@@ -1,4 +1,7 @@
-Popis webovej aplikacie: 
+Final project z predmetu Databazove technologie (2. rocnik)
+
+Blog webapp in Flask
+Popis:
 
 Jednoducha Flask Web App, ktora komunikuje s MongoDB hostovanou na cloud-based servise.
 Moja Web App sluzi na pridavanie a citanie blogov. Pouzivatel sa zaregistruje a po prihlaseni uvidi na home page rozne blogy. 
